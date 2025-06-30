@@ -1,0 +1,65 @@
+{% extends "contenido/menu.html" %}
+
+{% block titulo %}Contacto{% endblock %}
+
+{% block imagen %}
+    {% load static %}
+    {% static 'inicio/images/contacto.png' %}
+{% endblock %}
+
+{% block url %}
+<div class="breadcrumb-line">
+  <ul class="breadcrumb">
+    <a href="{% url 'principal' %}">
+      {% if request.path == '/' %}
+        Inicio
+      {% else %}
+        Inicio{{ request.path }}
+      {% endif %}
+    </a>
+  </ul>
+</div>
+{% endblock %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <div class="text-center">
+        <h1>Contacto</h1>
+        <p class="lead">Si tienes alguna pregunta o comentario, por favor completa el siguiente formulario.</p>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-7">
+            <form class="bg-light p-4 rounded shadow-sm">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="correo" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" id="correo" name="correo">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="curso" class="form-label">Curso</label>
+                    <select class="form-select" id="curso" name="curso">
+                        <option value="curso1">Curso de Python</option>
+                        <option value="curso2">Curso de bases de datos</option>
+                        <option value="curso3">Curso de POO</option>
+                        <option value="curso4">Curso de JavaScript</option>
+                        <option value="curso5">Curso de MongoDB</option>
+                    </select>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="comentario" class="form-label">Comentario:</label>
+                    <textarea class="form-control" id="comentario" rows="5"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-dark">Enviar</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

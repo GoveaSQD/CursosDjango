@@ -1,0 +1,77 @@
+{% extends "contenido/menu.html" %}
+
+<!-- MANDA EL NOMBRE QUE VA A RECIBIR EL TITULO EN EL ENCABEZADO -->
+{% block titulo %}Cursos{% endblock %}
+
+{% block imagen %}
+    {% load static %}
+    {% static 'inicio/images/cursos.png' %}
+{% endblock %}
+
+{% block url %}
+<div class="breadcrumb-line">
+  <ul class="breadcrumb">
+    <a href="{% url 'principal' %}">
+      {% if request.path == '/' %}
+        Inicio
+      {% else %}
+        Inicio{{ request.path }}
+      {% endif %}
+    </a>
+  </ul>
+</div>
+{% endblock %}
+<!-- esta parte sustituye lo que hay en el componente padre (encabezado) esto es la herencia -->
+{% block contenido %}
+
+<!-- CARDS QUE CONTIENEN LA INFORMACION DE LOS CURSOS -->
+<div class="container mt-5">
+  <div class="text-center mb-4">
+    <h1>Bienvenido a la página de cursos</h1>
+    <p class="lead">Los cursos disponibles son:</p>
+  </div>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col">
+      <div class="card h-100 shadow">
+        <div class="card-body text-center">
+          <h5 class="card-title"><i class="bi bi-filetype-py"></i> Curso de Python</h5>
+          <p class="card-text">Aprende Python desde cero, ideal para principiantes.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 shadow">
+        <div class="card-body text-center">
+          <h5 class="card-title"><i class="bi bi-database"></i> Bases de datos</h5>
+          <p class="card-text">Aprende a administrar una base de datos SQL.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 shadow">
+        <div class="card-body text-center">
+          <h5 class="card-title"><i class="bi bi-filetype-js"></i> Curso de JavaScript</h5>
+          <p class="card-text">Aprender JavaScript es más fácil con nuestros cursos.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 shadow">
+        <div class="card-body text-center">
+          <h5 class="card-title"><i class="bi bi-diagram-3"></i> Curso de POO</h5>
+          <p class="card-text">Aprende programación orientada a objetos.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 shadow">
+        <div class="card-body text-center">
+          <h5 class="card-title"><i class="bi bi-collection"></i> Curso de MongoDB</h5>
+          <p class="card-text">Aprende a utilizar bases de datos NoSQL.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "contenido/menu.html" %}
+
+<!-- MANDA EL NOMBRE QUE VA A RESIVIR EL TITULO EN EL ENCABEZADO -->
+{% block titulo %}Pagina principal{% endblock %}
+
+{% block imagen %}
+    {% load static %}
+    {% static 'inicio/images/home.png' %}
+{% endblock %}
+
+{% block url %}
+<div class="breadcrumb-line">
+  <ul class="breadcrumb">
+    <a href="{% url 'principal' %}">
+      {% if request.path == '/' %}
+        Inicio
+      {% else %}
+        Inicio{{ request.path }}
+      {% endif %}
+    </a>
+  </ul>
+</div>
+{% endblock %}
+
+<!-- esta parte sustitue loo que hay en el componente padre (encabezado) esto es la herencia -->
+{% block contenido %}
+<div class="container mt-5">
+  <div class="text-center">
+    <h1>Bienvenido a la pagina principal</h1>
+    <p class="lead">Esta es la pagina principal de nuestro sitio web.</p>
+  </div>
+  </div>
+
+  {#Resumen general de la pagina de los cursos y porque unirte a ellos#}
+  <div class="row mt-5 justify-content-center">
+    <div class="col-md-5 mb-4">
+      <div class="card h-100 shadow">
+        <div class="card-body text-center">
+          <h5 class="card-title">Cursos disponibles</h5>
+          <p class="card-text">Explora nuestros cursos y mejora tus habilidades.</p>
+          <a href="{% url 'cursos' %}" class="btn btn-dark">Ver Cursos</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5 mb-4">
+      <div class="card h-100 shadow">
+        <div class="card-body text-center">
+          <h5 class="card-title">Contáctanos</h5>
+          <p class="card-text">Si tienes alguna pregunta o comentario, no dudes en contactarnos.</p>
+          <a href="{% url 'contacto' %}" class="btn btn-dark">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} 
