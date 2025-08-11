@@ -1,0 +1,70 @@
+{% extends "contenido/menu.html" %}
+
+{% block titulo %}Eliminar Curso{% endblock %}
+
+{% block imagen %}
+    {% load static %}
+    {% static 'inicio/images/cursos.png' %}
+{% endblock %}
+
+{% block url %}
+<div class="breadcrumb-line">
+  <ul class="breadcrumb">
+    <a href="{% url 'principal' %}">
+      Inicio
+    </a>
+    <span class="mx-2">/</span>
+    <a href="{% url 'cursos' %}">
+      Cursos
+    </a>
+    <span class="mx-2">/</span>
+    <a href="{% url 'lista_cursos_crud' %}">
+      Administración
+    </a>
+    <span class="mx-2">/</span>
+    <span>Eliminar</span>
+  </ul>
+</div>
+{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <div class="card border-secondary">
+        <div class="card-header bg-gray-200 text-dark">
+            <h3 class="card-title mb-0">
+                <i class="fas fa-exclamation-triangle"></i> Confirmar Eliminación
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-secondary">
+                <h4 class="alert-heading text-dark">¡Advertencia!</h4>
+                <p class="text-dark">¿Estás seguro que deseas eliminar el siguiente curso? Esta acción no se puede deshacer.</p>
+            </div>
+            
+            <div class="card mb-4 border-secondary">
+                <div class="card-body bg-gray-100">
+                    <h5 class="text-dark">{{ object.nombre }}</h5>
+                    <p class="text-muted">{{ object.descripcion|truncatechars:100 }}</p>
+                    <div class="d-flex justify-content-between">
+                        <span class="text-dark"><strong>Turno:</strong> {{ object.turno }}</span>
+                        <span class="text-dark"><strong>Precio:</strong> ${{ object.precio }}</span>
+                        <span class="text-dark"><strong>Cupo:</strong> {{ object.cupo }}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <form method="post">
+                {% csrf_token %}
+                <div class="d-flex justify-content-end">
+                    <a href="{% url 'detalle_curso' object.pk %}" class="btn btn-outline-secondary me-2">
+                        <i class="fas fa-times"></i> Cancelar
+                    </a>
+                    <button type="submit" class="btn btn-secondary">
+                        <i class="fas fa-check"></i> Confirmar Eliminación
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

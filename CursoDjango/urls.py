@@ -18,15 +18,30 @@ from django.contrib import admin
 from django.urls import path
 from contenido import views
 from django.conf import settings
+from django.conf.urls.static import static
+from cursos.views import (
+    CursoListView, 
+    CursoCreateView, 
+    CursoUpdateView, 
+    CursoDeleteView, 
+    CursoDetailView
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.principal, name='principal'),
     path('contacto/', views.contacto, name='contacto'),
     path('cursos/', views.cursos, name='cursos'),
-]
+    path('crud/', CursoListView.as_view(), name='lista_cursos_crud'),
+    path('crud/nuevo/', CursoCreateView.as_view(), name='crear_curso'),
+    path('crud/<int:pk>/', CursoDetailView.as_view(), name='detalle_curso'),
+    path('crud/<int:pk>/editar/', CursoUpdateView.as_view(), name='editar_curso'),
+    path('crud/<int:pk>/eliminar/', CursoDeleteView.as_view(), name='eliminar_curso'),
+] 
 
 if settings.DEBUG:
 
     from django.conf.urls.static import static
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

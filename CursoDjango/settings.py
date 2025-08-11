@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +42,49 @@ INSTALLED_APPS = [
     'contenido',
     'cursos.apps.CursosConfig',
     'ckeditor',
+]
+
+JAZZMIN_SETTINGS = {
+    #tema oscuro
+    "dark_mode": True,
+    "login_logo_dark": None,
+    "login_logo": None,
+    "site_title": "DevCursos",
+    "site_header": "DevCursos",
+    "site_brand": "DevCursos",
+    "site_logo": None,
+    "welcome_sign": "Bienvenido al panel de administración de DevCursos",
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "darkly",
+    # color de los botones grises a excepcion de eliminar
+    "button_primary": "#6c757d",
+    "button_secondary": "#6c757d",
+    "button_success": "#206831",
+    "button_info": "#18616c",
+    "button_warning": "#665729",
+    "button_danger": "#7e2a32",
+    "button_light": "#f8f9fa",
+    "button_dark": "#343a40",
+    # color de los botones de eliminar
+    "button_delete": "#dc3545",
+    # cambio de cp;pr de los botones del panel de control
+    "navbar_brand_color": "#343a40",
+    "navbar_link_color": "#ffffff",
+    "navbar_link_hover_color": "#ffffff",
+    "navbar_active_link_color": "#ffffff",
+    "navbar_active_link_hover_color": "#ffffff",
+    # color de los botones del panel de control
+    "navbar_button_color": "#ffffff",
+    "navbar_button_hover_color": "#ffffff",
+    "navbar_button_active_color": "#ffffff",
+    "navbar_button_active_hover_color": "#ffffff",
+    
+}
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 MIDDLEWARE = [
@@ -57,7 +102,10 @@ ROOT_URLCONF = 'CursoDjango.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'templates/admin'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,8 +126,12 @@ WSGI_APPLICATION = 'CursoDjango.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cursosdjango',
+        'USER': 'root',
+        'PASSWORD': 'GoveaSQD',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -106,19 +158,24 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+# Configuración de internacionalización
+LANGUAGE_CODE = 'es-mx'
+TIME_ZONE = 'America/Mexico_City'
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
 
+# Configuración de mensajes
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

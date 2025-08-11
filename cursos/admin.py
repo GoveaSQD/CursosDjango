@@ -1,7 +1,5 @@
 from django.contrib import admin
-from .models import Alumnos
-from .models import Comentario
-from .models import Curso
+from .models import Alumnos, Comentario, Curso  # Importación única
 
 class AdministrarModelo(admin.ModelAdmin):
     readonly_fields = ('created', 'updated')
@@ -18,20 +16,11 @@ class AdministrarModelo(admin.ModelAdmin):
         }),
     )
 
-admin.site.site_header = "CONVOCATORIAS"
-admin.site.site_title = "CONVOCATORIAS"
-admin.site.index_title = "Cursos"
-
-admin.site.register(Alumnos, AdministrarModelo)
-
 class AdministrarComentarios(admin.ModelAdmin):
     list_display = ('id', 'alumno', 'created')
     search_fields = ('id', 'alumno__nombre', 'created')
     date_hierarchy = 'created'
     readonly_fields = ('created', 'id')
-
-admin.site.register(Comentario, AdministrarComentarios)
-
 
 class AdministrarCursos(admin.ModelAdmin):
     readonly_fields = ('created', 'updated')
@@ -48,4 +37,12 @@ class AdministrarCursos(admin.ModelAdmin):
         }),
     )
 
+# Configuración del admin
+admin.site.site_header = "CONVOCATORIAS"
+admin.site.site_title = "CONVOCATORIAS"
+admin.site.index_title = "Cursos"
+
+# Registro de modelos (solo una vez)
+admin.site.register(Alumnos, AdministrarModelo)
+admin.site.register(Comentario, AdministrarComentarios)
 admin.site.register(Curso, AdministrarCursos)
